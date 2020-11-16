@@ -39,8 +39,8 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
         <div class="sidebar-brand-icon rotate-n-15">
-          SA
-        </div>
+          <i class="fas fa-laugh-wink"></i>
+      </div>
         <div class="sidebar-brand-text mx-2">POSPRO_LARAVEL</div>
       </a>
 
@@ -205,7 +205,7 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-            <a class="nav-link" href="{{route('profile.edit',Auth::user()->id)}}">
+            <a class="nav-link" href="">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
             </a>
             </li>

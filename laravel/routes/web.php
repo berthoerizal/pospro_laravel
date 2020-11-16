@@ -18,5 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+route::resource('profile', 'ProfileController');
+Route::put('/update_password/{id}', ['as' => 'update_password', 'uses' => 'UserController@update_password']);
 
 Auth::routes();
