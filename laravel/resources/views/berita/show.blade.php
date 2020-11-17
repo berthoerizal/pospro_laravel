@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="border border-primary">
-                        <img src="{{ asset('assets/images/'.$berita->gambar) }}" class="img img-responsive" width="100%">
+                        @include('berita.modal_image')
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -43,4 +43,5 @@
     <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
+
 @endsection
