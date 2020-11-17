@@ -40,6 +40,14 @@
                                                         <input type="file" name="gambar" id="gambar">
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Akses Level</td>
+                                                    <td><b> @if ($user->id_role=="" || $user->id_role=="anggota")
+                                                        Anggota
+                                                        @elseif ($user->id_role=="admin")
+                                                        Administrator
+                                                        @endif</b></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>

@@ -20,7 +20,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $title = "Users";
+        $user = User::all();
+
+        return view('user.index', [
+            'user' => $user,
+            'title' => $title,
+        ]);
     }
 
     /**
@@ -41,7 +47,46 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->password == $request->confirm_password) {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required|min:8'
+            ]);
+
+            if (strlen($request->password) < 8) {
+                session()->flash('error', 'Data gagal ditambah, jumlah password kurang dari delapan (8)');
+                return redirect(route('user.index'));
+            }
+
+            $users = User::all();
+            foreach ($users as $users) {
+                if ($users->email == $request->email) {
+                    session()->flash('error', 'Data gagal ditambah, email ' . $request->email . ' sudah digunakan');
+                    return redirect(route('user.index'));
+                }
+            }
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'id_role' => $request->id_role
+            ]);
+
+            if (!$user) {
+                session()->flash('error', 'Data gagal ditambah');
+                return redirect(route('user.index'));
+            } else {
+                session()->flash('success', 'Data berhasil ditambah');
+                return redirect(route('user.index'));
+            }
+            session()->flash('success', 'Data berhasil ditambah');
+            return redirect(route('user'));
+        } else {
+            session()->flash('error', 'Konfirmasi Password tidak valid');
+            return redirect(route('user'));
+        }
     }
 
     /**
@@ -75,6 +120,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
+        $user = User::find($id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'id_role' => $request->id_role
+        ]);
+
+        if (!$user) {
+            session()->flash('error', 'Data gagal diubah');
+            return redirect(route('user.index'));
+        } else {
+            session()->flash('success', 'Data berhasil diubah');
+            return redirect(route('user.index'));
+        }
     }
 
     /**
@@ -85,12 +149,25 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $old_image = \base_path() . "/../assets/images/" . $user->gambar;
+        @unlink($old_image);
+        $user->delete();
+        if (!$user) {
+            session()->flash('error', 'Data gagal dihapus');
+            return redirect(route('user.index'));
+        } else {
+            session()->flash('success', 'Data berhasil dihapus');
+            return redirect(route('user.index'));
+        }
     }
 
     public function update_password(Request $request, $id)
     {
         if ($request->password == $request->confirm_password) {
+            $request->validate([
+                'password' => 'required|min:8'
+            ]);
             $user = User::find($id);
             $user->update([
                 'password' => Hash::make($request->password)
@@ -101,5 +178,19 @@ class UserController extends Controller
             session()->flash('error', 'Konfirmasi Password tidak valid');
             return redirect(route('profile.edit', $id));
         }
+    }
+
+    public function reset_password($id)
+    {
+        $karakter = "ABCDEFGHIJKLMNOPQRSTUVWQYZ1234567890";
+        $password = substr(str_shuffle($karakter), 0, 8);
+        $user = User::find($id);
+        $user->update([
+            'password' => Hash::make($password)
+        ]);
+
+        $user = User::find($id);
+        session()->flash('success', 'Email: ' . $user->email . ' | Password Baru: ' . $password . '');
+        return redirect(route('user.index'));
     }
 }

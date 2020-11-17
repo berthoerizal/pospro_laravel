@@ -68,100 +68,11 @@
           <span>Profile</span></a>
       </li>
 
-      @if (Auth::user()->role=="bagian" || Auth::user()->role=="bidang" || Auth::user()->role=="tim_anggaran")
       <li class="nav-item">
         <a class="nav-link" href="{{route('user.index')}}">
           <i class="fa fa-users"></i>
           <span>User</span></a>
       </li>
-      @elseif(Auth::user()->role=="admin")
-       <!-- Nav Item - Pages Collapse Menu -->
-       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fa fa-users"></i>
-          <span>User</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{route('user.index')}}">User Umum</a>
-            <a class="collapse-item" href="{{route('user_bidang.index')}}">User Bagian/Bidang</a>
-            <a class="collapse-item" href="{{route('user_unit.index')}}">User Unit</a>
-          </div>
-        </div>
-      </li>
-      @endif
-
-    @if (Auth::user()->role=="bagian" || Auth::user()->role=="bidang" || Auth::user()->role=="unit" || Auth::user()->role=="pengguna_anggaran")
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fa fa-money-check-alt"></i>
-          <span>Data Entry</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{route('kegiatan.index')}}">Kegiatan</a>
-            <a class="collapse-item" href="{{route('pkegiatan.index')}}">Perubahan</a>
-          </div>
-        </div>
-      </li>
-      @endif
-
-      @if (Auth::user()->role=="tim_anggaran")
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fa fa-money-check-alt"></i>
-          <span>Data Entry</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{route('jenis_anggaran.index')}}">Jenis Anggaran</a>
-            <a class="collapse-item" href="{{route('program.index')}}">Program</a>
-            <a class="collapse-item" href="{{route('kegiatan.index')}}">Kegiatan</a>
-            <a class="collapse-item" href="{{route('pkegiatan.index')}}">Perubahan</a>
-          </div>
-        </div>
-      </li>
-      @endif
-
-    @if (Auth::user()->role=="admin")
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#unitorganisasicollapsed" aria-expanded="true" aria-controls="unitorganisasicollapsed">
-            <i class="fa fa-book"></i>
-            <span> Unit Organisasi</span>
-        </a>
-        <div id="unitorganisasicollapsed" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Parameter</h6>
-                <a class="collapse-item" href="{{route('bidang.index')}}">Bagian/Bidang</a>
-                <a class="collapse-item" href="{{route('unit.index')}}">Unit<a>
-                {{-- <a class="collapse-item" href="{{route('urusan.index')}}">Urusan</a> --}}
-                {{-- <a class="collapse-item" href="{{route('sub-unit.index')}}">Sub Unit<a> --}}
-            </div>
-        </div>
-        </li>
-        @endif
-
-        @if (Auth::user()->role=="bendahara")
-         <!-- Nav Item - Pages Collapse Menu -->
-         <li class="nav-item">
-          <a class="nav-link" href="{{route('pajak.index')}}">
-            <i class="fa fa-percent"></i>
-            <span>Pajak</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('spp.index')}}">
-            <i class="fa fa-money-bill"></i>
-            <span>SPP</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('spj.index')}}">
-            <i class="fa fa-calendar"></i>
-            <span>SPJ Fungsional</span></a>
-        </li>
-        @endif
 
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
