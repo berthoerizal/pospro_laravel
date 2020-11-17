@@ -83,7 +83,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="{{route('berita.index')}}">Berita</a>
-                <a class="collapse-item" href="">Berkas</a>
+                <a class="collapse-item" href="{{route('dokumen.index')}}">Dokumen</a>
                 <a class="collapse-item" href="">Video Youtube</a>
                 <a class="collapse-item" href="">Import Excel</a>
                 <a class="collapse-item" href="">Auto Fill</a>
