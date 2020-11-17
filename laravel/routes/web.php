@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 route::resource('profile', 'ProfileController');
 route::resource('user', 'UserController');
+route::resource('berita', 'BeritaController');
 Route::put('/update_password/{id}', ['as' => 'update_password', 'uses' => 'UserController@update_password']);
 Route::get('/reset_password/{id}', ['as' => 'reset_password', 'uses' => 'UserController@reset_password']);
 

@@ -81,8 +81,6 @@ class UserController extends Controller
                 session()->flash('success', 'Data berhasil ditambah');
                 return redirect(route('user.index'));
             }
-            session()->flash('success', 'Data berhasil ditambah');
-            return redirect(route('user'));
         } else {
             session()->flash('error', 'Konfirmasi Password tidak valid');
             return redirect(route('user'));

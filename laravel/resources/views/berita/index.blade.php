@@ -4,16 +4,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-        {{-- @include('partial.message') --}}
-
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button> 
-            <strong>{{ $message }}</strong>
-        </div>
-        @else
         @include('partial.message')
-        @endif
 
        <!-- Page Heading -->
        <h1 class="h3 mb-2 text-gray-800">{{$title}}</h1><hr>
@@ -22,7 +13,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="float-right">
-                @include('user.create')
+                <a href="{{route('berita.create')}}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah</a>
             </div>
         </div>
         <div class="card-body">
@@ -30,28 +21,28 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Akses Level</th>
+                <th>Judul</th>
+                <th>Uploader</th>
+                <th>Status</th>
                 <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($user as $user)
+                @foreach($berita as $berita)
                     <tr>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
+                        <td><b>{{$berita->judul}}</b><br>Tanggal Upload: {{date("d M Y", strtotime($berita->created_at))}}</td>
+                        <td>{{$berita->name}}</td>
                         <td>
-                            @if ($user->id_role=="" || $user->id_role=="anggota")
-                                Anggota
-                                @elseif ($user->id_role=="admin")
-                                Administrator
-                                @endif
+                            @if($berita->status=="publish")
+                            Publish
+                            @else
+                            Draft
+                            @endif
                         </td>
                         <td>
-                            @include('user.edit')
-                            @include('user.reset_password')
-                            @include('user.delete')
+                            <a class="btn btn-info btn-sm" href="{{route('berita.show', $berita->id)}}"><i class="fa fa-file-alt"></i> Detail</a>
+                            <a class="btn btn-success btn-sm" href="{{route('berita.edit', $berita->id)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
+                            @include('berita.delete')
                         </td>
                     </tr>
                 @endforeach
