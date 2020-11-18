@@ -13,7 +13,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="float-right">
-                <a href="{{route('berita.create')}}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah</a>
+                <a href="{{route('video.create')}}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah</a>
             </div>
         </div>
         <div class="card-body">
@@ -21,28 +21,20 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
-                <th>Judul</th>
+                <th>Nama Video</th>
                 <th>Uploader</th>
-                <th>Status</th>
                 <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($berita as $berita)
+                @foreach($video as $video)
                     <tr>
-                        <td><b>{{$berita->judul}}</b><br><span class="badge badge-light">Tanggal Upload: {{date("d M Y", strtotime($berita->created_at))}}</span></td>
-                        <td>{{$berita->name}}</td>
+                        <td style="width: 60%;"><b>{{$video->nama_video}}</b><br><span class="badge badge-light">Tanggal Upload: {{date("d M Y", strtotime($video->created_at))}}</span></td>
+                        <td>{{$video->name}}</td>
                         <td>
-                            @if($berita->status=="publish")
-                            Publish
-                            @else
-                            Draft
-                            @endif
-                        </td>
-                        <td>
-                            <a class="btn btn-info btn-sm" href="{{route('berita.show', $berita->id)}}"><i class="fa fa-file-alt"></i> Detail</a>
-                            <a class="btn btn-success btn-sm" href="{{route('berita.edit', $berita->id)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
-                            @include('berita.delete')
+                            <a class="btn btn-info btn-sm" href="{{route('video.show', $video->id)}}"><i class="fa fa-file-alt"></i> Detail</a>
+                            <a class="btn btn-success btn-sm" href="{{route('video.edit', $video->id)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
+                            @include('video.delete')
                         </td>
                     </tr>
                 @endforeach

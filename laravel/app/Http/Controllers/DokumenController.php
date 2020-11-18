@@ -57,11 +57,12 @@ class DokumenController extends Controller
                 $filename = $file->getClientOriginalName();
                 $file->move(\base_path() . "/../assets/images", $filename);
 
-                $slug = Str::slug($request->nama_dokumen) . "-" . $filename;
+                $slug_filename = Str::slug($filename);
+                $slug_dokumen = Str::slug($request->nama_dokumen) . "-" . $slug_filename;
                 Dokumen::create([
                     'id_user' => Auth::user()->id,
                     'nama_dokumen' => $request->nama_dokumen,
-                    'slug_dokumen' => $slug,
+                    'slug_dokumen' => $slug_dokumen,
                     'gambar' => $filename
                 ]);
             }
@@ -116,10 +117,11 @@ class DokumenController extends Controller
             $old_image = \base_path() . "/../assets/images/" . $dokumen->gambar;
             @unlink($old_image);
 
-            $slug = Str::slug($request->nama_dokumen) . "-" . $gambar;
+            $slug_gambar = Str::slug($gambar);
+            $slug_dokumen = Str::slug($request->nama_dokumen) . "-" . $slug_gambar;
             $dokumen->update([
                 'nama_dokumen' => $request->nama_dokumen,
-                'slug_dokumen' => $slug,
+                'slug_dokumen' => $slug_dokumen,
                 'id_user' => Auth::user()->id,
                 'gambar' => $gambar
             ]);

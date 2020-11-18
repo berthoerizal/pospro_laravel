@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
+  <title>POSPRO LARAVEL</title>
 
   <!-- Custom fonts for this template -->
   <link href="{{asset('assets/admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -41,7 +42,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
       </div>
-        <div class="sidebar-brand-text mx-2">POSPRO_LARAVEL</div>
+        <div class="sidebar-brand-text mx-2">POSPRO LARAVEL</div>
       </a>
 
       <!-- Divider -->
@@ -84,7 +85,7 @@
                 <h6 class="collapse-header">Custom Components:</h6>
                 <a class="collapse-item" href="{{route('berita.index')}}">Berita</a>
                 <a class="collapse-item" href="{{route('dokumen.index')}}">Dokumen</a>
-                <a class="collapse-item" href="">Video Youtube</a>
+                <a class="collapse-item" href="{{route('video.index')}}">Video</a>
                 <a class="collapse-item" href="">Import Excel</a>
                 <a class="collapse-item" href="">Auto Fill</a>
                 <a class="collapse-item" href="">Countdown</a>
@@ -135,7 +136,7 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{route('profile.edit', Auth::user()->id)}}">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
             </a>
             </li>
