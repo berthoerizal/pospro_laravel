@@ -33,12 +33,6 @@
                                 <input type="file" class="" name="gambar[]" id="gambar" multiple required>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="keterangan">Keterangan</label>
-                                <input type="text" class="form-control form-control-sm" name="keterangan" id="keterangan" placeholder="Keterangan" value="{{old('keterangan')}}" required>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

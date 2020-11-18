@@ -22,7 +22,6 @@
             <thead>
                 <tr>
                 <th>Nama Dokumen</th>
-                <th>Tipe File</th>
                 <th>Uploader</th>
                 <th>Aksi</th>
                 </tr>
@@ -30,11 +29,12 @@
             <tbody>
                 @foreach($dokumen as $dokumen)
                     <tr>
-                        <td><b>{{$dokumen->nama_dokumen}}</b><br><span class="badge badge-light">Tanggal Upload: {{date("d M Y", strtotime($dokumen->created_at))}}</span><hr><i>{{$dokumen->keterangan}}</i></td>
-                        <td>{{pathinfo($dokumen->gambar, PATHINFO_EXTENSION)}}</td>
+                        <td><b>{{$dokumen->nama_dokumen}}</b><br><span class="badge badge-light">Tanggal Upload: {{date("d M Y", strtotime($dokumen->created_at))}}</span><hr><i>{{$dokumen->slug_dokumen}}</i></td>
                         <td>{{$dokumen->name}}</td>
                         <td>
                             <a href="{{route('download_dokumen', $dokumen->id)}}" class="btn btn-dark btn-sm"><i class="fa fa-download"></i> Download</a>
+                            <a class="btn btn-success btn-sm" href="{{route('dokumen.edit', $dokumen->id)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
+                            @include('dokumen.delete')
                         </td>
                     </tr>
                 @endforeach

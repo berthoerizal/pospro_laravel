@@ -57,12 +57,12 @@ class DokumenController extends Controller
                 $filename = $file->getClientOriginalName();
                 $file->move(\base_path() . "/../assets/images", $filename);
 
+                $slug = Str::slug($request->nama_dokumen) . "-" . $filename;
                 Dokumen::create([
                     'id_user' => Auth::user()->id,
                     'nama_dokumen' => $request->nama_dokumen,
-                    'slug_dokumen' => Str::slug($request->nama_dokumen),
-                    'gambar' => $filename,
-                    'keterangan' => $request->keterangan
+                    'slug_dokumen' => $slug,
+                    'gambar' => $filename
                 ]);
             }
 
@@ -90,7 +90,12 @@ class DokumenController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = "Edit Dokumen";
+        $dokumen = Dokumen::find($id);
+        return view('dokumen.edit', [
+            'title' => $title,
+            'dokumen' => $dokumen
+        ]);
     }
 
     /**
@@ -102,7 +107,31 @@ class DokumenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->hasFile('gambar')) {
+            $resorce  = $request->file('gambar');
+            $gambar   = $resorce->getClientOriginalName();
+            $resorce->move(\base_path() . "/../assets/images", $gambar);
+
+            $dokumen = Dokumen::find($id);
+            $old_image = \base_path() . "/../assets/images/" . $dokumen->gambar;
+            @unlink($old_image);
+
+            $slug = Str::slug($request->nama_dokumen) . "-" . $gambar;
+            $dokumen->update([
+                'nama_dokumen' => $request->nama_dokumen,
+                'slug_dokumen' => $slug,
+                'id_user' => Auth::user()->id,
+                'gambar' => $gambar
+            ]);
+
+            if (!$dokumen) {
+                session()->flash('error', 'Data gagal diubah');
+                return redirect(route('dokumen.edit', $id));
+            } else {
+                session()->flash('success', 'Data berhasil diubah');
+                return redirect(route('dokumen.index'));
+            }
+        }
     }
 
     /**
@@ -113,7 +142,17 @@ class DokumenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dokumen = Dokumen::find($id);
+        $old_image = \base_path() . "/../assets/images/" . $dokumen->gambar;
+        @unlink($old_image);
+        $dokumen->delete();
+        if (!$dokumen) {
+            session()->flash('error', 'Data gagal dihapus');
+            return redirect(route('dokumen.index'));
+        } else {
+            session()->flash('success', 'Data berhasil dihapus');
+            return redirect(route('dokumen.index'));
+        }
     }
 
     public function download_dokumen($id)

@@ -131,7 +131,7 @@ class BeritaController extends Controller
 
             $berita->update([
                 'judul' => $request->judul,
-                'slug' => Str::slug($request->judul),
+                'slug_judul' => Str::slug($request->judul),
                 'id_user' => Auth::user()->id,
                 'status' => $request->status,
                 'isi' => $request->isi,
@@ -149,7 +149,7 @@ class BeritaController extends Controller
             $berita = Berita::find($id);
             $berita->update([
                 'judul' => $request->judul,
-                'slug' => Str::slug($request->judul),
+                'slug_judul' => Str::slug($request->judul),
                 'id_user' => Auth::user()->id,
                 'status' => $request->status,
                 'isi' => $request->isi,
