@@ -10,38 +10,39 @@
 	<meta content="" name="description">
 	<meta content="Bertho Erizal" name="author">
 	<link href="{{asset('assets/admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
+
+	<style>
+		body, html {
+  			height: 100%;
+		}
+		.background {
+		height: 80%;
+		background-position: center;
+  		background-repeat: no-repeat;
+  		background-size: cover;
+		}
+	</style>
 </head>
 
 <body>
+	
 	<nav class="navbar navbar-light bg-light">
 		<a class="navbar-brand" href="#">{{$konfigurasi->nama_web}}</a>
-	  
-			<form class="form-inline">
-				<a href="{{route('login')}}" class="btn btn-outline-secondary" style="margin-right: 5px;">Login</a>
-				<a href="{{route('register')}}" class="btn btn-outline-secondary">Register</a>
-			</form>
-	  </nav>
-	<section id="welcome_message">
-	</section>
+		<form class="form-inline">
+			<a href="{{route('login')}}" class="btn btn-outline-secondary" style="margin-right: 5px;">Login</a>
+			<a href="{{route('register')}}" class="btn btn-outline-secondary">Register</a>
+		</form>
+	</nav>
 
-	<script src="{{asset('assets/welcome/three.min.js')}}"></script>
-	<script src="{{asset('assets/welcome/vanta.globe.min.js')}}"></script>
-	<script>
-	VANTA.GLOBE({
-		el: "#welcome_message",
-		mouseControls: true,
-		touchControls: true,
-		gyroControls: false,
-		minHeight: 600.00,
-		minWidth: 200.00,
-		scale: 1.00,
-		scaleMobile: 1.00,
-		color: 0x0,
-		color2: 0x0,
-		size: 0.50,
-	backgroundColor: 0xffffff
-	})
-	</script>
+	<header class="background">
+		<div class="container h-100">
+		  <div class="row h-100 align-items-center">
+			<div class="col-12 text-center">
+			  <h1 class="font-weight-light">Welcome to {{$konfigurasi->nama_web}}</h1>
+			  <p class="lead">{{$konfigurasi->author}}</p>
+			</div>
+		  </div>
+		</div>
+	  </header>
 </body>
-
 </html>
