@@ -18,7 +18,7 @@
         </div>
         <div class="card-body">
             <div class="modal-body">
-                <form action="{{route('countdown.update', $countdown->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('countdown.update', $countdown->id)}}" method="POST">
                     @method('PUT')
                     {{ csrf_field() }}
                     <div class="modal-body">

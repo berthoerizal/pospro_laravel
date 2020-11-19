@@ -24,6 +24,7 @@ route::resource('berita', 'BeritaController');
 route::resource('dokumen', 'DokumenController');
 route::resource('video', 'VideoController');
 route::resource('countdown', 'CountdownController');
+route::resource('konfigurasi', 'KonfigurasiController');
 Route::put('/update_password/{id}', ['as' => 'update_password', 'uses' => 'UserController@update_password']);
 Route::get('/reset_password/{id}', ['as' => 'reset_password', 'uses' => 'UserController@reset_password']);
 Route::get('/download_dokumen/{id}', ['as' => 'download_dokumen', 'uses' => 'DokumenController@download_dokumen']);

@@ -90,6 +90,12 @@
         </div>
     </li>
 
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('konfigurasi.index')}}">
+          <i class="fa fa-wrench"></i>
+          <span>Konfigurasi</span></a>
+  </li>
+
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
           document.getElementById('logout-form').submit();">
@@ -153,7 +159,7 @@
      <footer class="sticky-footer bg-white">
         <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; SIM-ANGGARAN 2019</span>
+            <span>Copyright &copy; Bertho Erizal</span>
         </div>
         </div>
     </footer>
