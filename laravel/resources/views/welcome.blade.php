@@ -4,7 +4,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>POSPRO_LARAVEL</title>
+	<title>{{$konfigurasi->nama_web}}</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta content="" name="keywords">
 	<meta content="" name="description">
@@ -14,7 +14,7 @@
 
 <body>
 	<nav class="navbar navbar-light bg-light">
-		<a class="navbar-brand" href="#">POSPRO LARAVEL</a>
+		<a class="navbar-brand" href="#">{{$konfigurasi->nama_web}}</a>
 	  
 			<form class="form-inline">
 				<a href="{{route('login')}}" class="btn btn-outline-secondary" style="margin-right: 5px;">Login</a>
