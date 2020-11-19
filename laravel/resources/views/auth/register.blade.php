@@ -37,7 +37,7 @@
                             <div class="col-lg">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">POSPRO_LARAVEL</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">{{$konfigurasi->nama_web}}</h1>
                                     </div>
 
                                                                         

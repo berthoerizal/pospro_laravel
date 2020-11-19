@@ -38,7 +38,7 @@
               <div class="col-lg">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">POSPRO_LARAVEL</h1>
+                    <h1 class="h4 text-gray-900 mb-4">{{$konfigurasi->nama_web}}</h1>
                   </div>
                   <form method="POST" class="user" action="{{ route('login') }}">
                         @csrf
@@ -58,6 +58,9 @@
                             </span>
                         @enderror
                     </div>
+                    <hr>
+                    <a href="{{route('register')}}">Belum punya akun? Registrasi aja..</a>
+                    <br><br>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
                             {{ __('Login') }}
                     </button>

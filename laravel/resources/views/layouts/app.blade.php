@@ -85,7 +85,6 @@
                 <a class="collapse-item" href="">Import Excel</a>
                 <a class="collapse-item" href="">Auto Fill</a>
                 <a class="collapse-item" href="{{route('countdown.index')}}">Countdown</a>
-                <a class="collapse-item" href="">Lokasi</a>
             </div>
         </div>
     </li>
