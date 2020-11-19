@@ -20,13 +20,9 @@
   <link href="{{asset('assets/admin/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
   <script src="{{ asset('assets/admin/js/core/jquery.3.2.1.min.js') }}"></script>
   <link  href="{{ asset('assets/admin/message/toastr.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('assets/admin/message/toastr.min.js') }}"></script>
-    <link  href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
-    {{-- <style>
-      .table{
-          font-size: 14px;
-      }
-      </style> --}}
+  <script src="{{ asset('assets/admin/message/toastr.min.js') }}"></script>
+  
+  <link  href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -88,7 +84,7 @@
                 <a class="collapse-item" href="{{route('video.index')}}">Video</a>
                 <a class="collapse-item" href="">Import Excel</a>
                 <a class="collapse-item" href="">Auto Fill</a>
-                <a class="collapse-item" href="">Countdown</a>
+                <a class="collapse-item" href="{{route('countdown.index')}}">Countdown</a>
                 <a class="collapse-item" href="">Lokasi</a>
             </div>
         </div>
@@ -173,6 +169,7 @@
 
   <!-- Bootstrap core JavaScript-->
   <script src="{{asset('assets/admin/vendor/jquery/jquery.min.js')}}"></script>
+
   <script src="{{asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
   <!-- Core plugin JavaScript-->
@@ -190,7 +187,6 @@
   <script src="{{ asset('js/select2.min.js') }}"></script>
 
   <script>
-
     $(document).ready(function() {
         $('.tags-selector').select2();
     });

@@ -1,6 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="{{asset('assets/tinymce/js/tinymce/tinymce.min.js')}}" type="text/javascript"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        height: 100,
+        theme: 'modern',
+        plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+        toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+        image_advtab: true,
+        templates: [{
+                title: 'Test template 1',
+                content: 'Test 1'
+            },
+            {
+                title: 'Test template 2',
+                content: 'Test 2'
+            }
+        ],
+        content_css: [
+            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+            '//www.tinymce.com/css/codepen.min.css'
+        ]
+    });
+</script>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -39,8 +63,8 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nama_video">Keterangan</label>
-                                <input type="text" class="form-control form-control-sm" name="keterangan" id="keterangan" placeholder="Keterangan" value="{{$video->keterangan}}" required>
+                                <label for="keterangan">Keterangan</label>
+                                <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="10">{{$video->keterangan}}</textarea>
                             </div>
                         </div>
                     </div>
