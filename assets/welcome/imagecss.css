@@ -11,14 +11,14 @@ body {
 .context {
     width: 100%;
     position: absolute;
-    top: 50vh;
+    top: 40vh;
 
 }
 
 .context h1 {
     text-align: center;
     color: #757575;
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .context h6 {
@@ -37,7 +37,7 @@ body {
 }
 
 .circles {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -54,7 +54,6 @@ body {
     background: rgba(255, 255, 255, 0.2);
     animation: animate 25s linear infinite;
     bottom: -150px;
-
     background: #757575;
 }
 

@@ -27,21 +27,19 @@
 		<h1>Welcome to {{$konfigurasi->nama_web}}</h1><br>
 		<h6>{{$konfigurasi->author}}</h6>
     </div>
-
-
-<div class="area" >
-            <ul class="circles">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-            </ul>
+	<div class="area" >
+		<ul class="circles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
     </div >
 
 </body>
