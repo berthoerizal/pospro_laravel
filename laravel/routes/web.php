@@ -31,4 +31,5 @@ Route::get('/reset_password/{id}', ['as' => 'reset_password', 'uses' => 'UserCon
 Route::get('/download_dokumen/{id}', ['as' => 'download_dokumen', 'uses' => 'DokumenController@download_dokumen']);
 Route::get('/export', ['as' => 'export', 'uses' => 'DataexcelController@export']);
 Route::post('/import', ['as' => 'import', 'uses' => 'DataexcelController@import']);
+Route::get('/delete_all', ['as' => 'delete_all', 'uses' => 'DataexcelController@delete_all']);
 Auth::routes();

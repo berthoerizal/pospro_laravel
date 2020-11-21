@@ -49,7 +49,33 @@ class DataexcelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'username' => 'required',
+            'nama' => 'required',
+            'nomor_tps' => 'required'
+        ]);
+
+        $dataexcel = Dataexcel::all();
+        foreach ($dataexcel as $dataexcel) {
+            if ($dataexcel->username == $request->username) {
+                session()->flash('error', 'Data gagal ditambah, Username ' . $request->username . ' sudah digunakan');
+                return redirect(route('dataexcel.index'));
+            }
+        }
+
+        $data = Dataexcel::create([
+            'username' => $request->username,
+            'nama' => $request->nama,
+            'nomor_tps' => $request->nomor_tps
+        ]);
+
+        if (!$data) {
+            session()->flash('error', 'Data gagal ditambah');
+            return redirect(route('dataexcel.index'));
+        } else {
+            session()->flash('success', 'Data berhasil ditambah');
+            return redirect(route('dataexcel.index'));
+        }
     }
 
     /**
@@ -83,7 +109,20 @@ class DataexcelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataexcel = Dataexcel::find($id);
+        $dataexcel->update([
+            'username' => $request->username,
+            'nama' => $request->nama,
+            'nomor_tps' => $request->nomor_tps
+        ]);
+
+        if (!$dataexcel) {
+            session()->flash('error', 'Data gagal diedit');
+            return redirect(route('dataexcel.index'));
+        } else {
+            session()->flash('success', 'Data berhasil diedit');
+            return redirect(route('dataexcel.index'));
+        }
     }
 
     /**
@@ -94,7 +133,16 @@ class DataexcelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dataexcel = Dataexcel::find($id);
+        $dataexcel->delete();
+
+        if (!$dataexcel) {
+            session()->flash('error', 'Data gagal dihapus');
+            return redirect(route('dataexcel.index'));
+        } else {
+            session()->flash('success', 'Data berhasil dihapus');
+            return redirect(route('dataexcel.index'));
+        }
     }
 
     public function export()
@@ -126,5 +174,18 @@ class DataexcelController extends Controller
 
         // alihkan halaman kembali
         return redirect(route('dataexcel.index'));
+    }
+
+    public function delete_all()
+    {
+        $dataexcel = Dataexcel::truncate();
+
+        if (!$dataexcel) {
+            session()->flash('error', 'Data gagal dihapus');
+            return redirect(route('dataexcel.index'));
+        } else {
+            session()->flash('success', 'Data berhasil dihapus');
+            return redirect(route('dataexcel.index'));
+        }
     }
 }

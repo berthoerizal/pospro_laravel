@@ -19,11 +19,15 @@
                         <input id="excel" type="file" name="file" required>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-arrow-circle-down"></i> Import</button>
+                        <button type="submit" class="btn btn-dark btn-sm"><i class="fa fa-arrow-circle-down"></i> Import</button>
                         
-                <a href="{{route('export')}}" class="btn btn-success btn-sm"><i class="fa fa-arrow-circle-up"></i> Export</a>
+                <a href="{{route('export')}}" class="btn btn-dark btn-sm"><i class="fa fa-arrow-circle-up"></i> Export</a>
                     </div>
                 </form>
+            </span>
+            <span class="float-right">
+                @include('dataexcel.create')
+                @include('dataexcel.delete_all')
             </span>
         </div>
         <div class="card-body">
@@ -43,7 +47,10 @@
                         <td>{{$dataexcel->username}}</td>
                         <td>{{$dataexcel->nama}}</td>
                         <td>{{$dataexcel->nomor_tps}}</td>
-                        <td></td>
+                        <td>
+                            @include('dataexcel.edit')
+                            @include('dataexcel.delete')
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
