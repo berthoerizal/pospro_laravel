@@ -82,7 +82,7 @@
                 <a class="collapse-item" href="{{route('berita.index')}}">Berita</a>
                 <a class="collapse-item" href="{{route('dokumen.index')}}">Dokumen</a>
                 <a class="collapse-item" href="{{route('video.index')}}">Video</a>
-                <a class="collapse-item" href="">Import Excel</a>
+                <a class="collapse-item" href="{{route('dataexcel.index')}}">Data Excel</a>
                 <a class="collapse-item" href="">Auto Fill</a>
                 <a class="collapse-item" href="{{route('countdown.index')}}">Countdown</a>
             </div>
