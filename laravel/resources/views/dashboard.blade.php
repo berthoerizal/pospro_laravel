@@ -10,7 +10,9 @@
     <h1 class="h3 mb-2 text-gray-800">{{$title}}</h1>
 
     <!-- DataTales Example -->
-    <div class="row"></div>
+    <div class="row">
+        
+    </div>
 
     <!-- /.container-fluid -->
 </div>
