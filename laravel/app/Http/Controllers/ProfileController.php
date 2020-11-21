@@ -81,6 +81,11 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' . $id,
+            'name' => 'required'
+        ]);
+
         if ($request->hasFile('gambar')) {
             $resorce  = $request->file('gambar');
             $gambar   = $resorce->getClientOriginalName();
