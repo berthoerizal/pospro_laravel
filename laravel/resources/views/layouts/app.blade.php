@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{$konfigurasi->nama_web}}</title>
 
   <!-- Custom fonts for this template -->
@@ -23,6 +24,10 @@
   <script src="{{ asset('assets/admin/message/toastr.min.js') }}"></script>
   
   <link  href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/jqueryui/jquery-ui.min.css')}}">
+
+  <!-- Script -->
 </head>
 
 <body id="page-top">
@@ -83,7 +88,7 @@
                 <a class="collapse-item" href="{{route('dokumen.index')}}">Dokumen</a>
                 <a class="collapse-item" href="{{route('video.index')}}">Video</a>
                 <a class="collapse-item" href="{{route('dataexcel.index')}}">Data Excel</a>
-                <a class="collapse-item" href="">Auto Fill</a>
+                <a class="collapse-item" href="{{route('autofill.index')}}">Auto Fill</a>
                 <a class="collapse-item" href="{{route('countdown.index')}}">Countdown</a>
             </div>
         </div>
@@ -190,6 +195,8 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('assets/admin/js/demo/datatables-demo.js')}}"></script>
   <script src="{{ asset('js/select2.min.js') }}"></script>
+  
+  <script src="{{asset('assets/jqueryui/jquery-ui.min.js')}}" type="text/javascript"></script>
 
   <script>
     $(document).ready(function() {
