@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -52,7 +53,13 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        if (Auth::user()->id == $id) {
+            $user = User::find($id);
+            $title = $user->name;
+            return view('profile.show', ['title' => $title, 'user' => $user]);
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -63,13 +70,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::user()->id == $id) {
-            $user = User::find($id);
-            $title = $user->name;
-            return view('profile.edit', ['title' => $title, 'user' => $user]);
-        } else {
-            echo "404";
-        }
+        //
     }
 
     /**
@@ -103,10 +104,10 @@ class ProfileController extends Controller
 
             if (!$user) {
                 session()->flash('error', 'Data gagal diubah');
-                return redirect(route('profile.edit', $id));
+                return redirect(route('profile.show', $id));
             } else {
                 session()->flash('success', 'Data berhasil diubah');
-                return redirect(route('profile.edit', $id));
+                return redirect(route('profile.show', $id));
             }
         } else {
             $user = User::find($id);
@@ -117,10 +118,10 @@ class ProfileController extends Controller
 
             if (!$user) {
                 session()->flash('error', 'Data gagal diubah');
-                return redirect(route('profile.edit', $id));
+                return redirect(route('profile.show', $id));
             } else {
                 session()->flash('success', 'Data berhasil diubah');
-                return redirect(route('profile.edit', $id));
+                return redirect(route('profile.show', $id));
             }
         }
     }
@@ -134,5 +135,23 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function update_password(Request $request, $id)
+    {
+        if ($request->password == $request->confirm_password) {
+            $request->validate([
+                'password' => 'required|min:8'
+            ]);
+            $user = User::find($id);
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+            session()->flash('success', 'Password Berhasil diperbarui');
+            return redirect(route('profile.show', $id));
+        } else {
+            session()->flash('error', 'Konfirmasi Password tidak valid');
+            return redirect(route('profile.show', $id));
+        }
     }
 }

@@ -65,16 +65,18 @@
       </div>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{route('profile.edit', Auth::user()->id)}}">
+        <a class="nav-link" href="{{route('profile.show', Auth::user()->id)}}">
           <i class="fa fa-user"></i>
           <span>Profile</span></a>
       </li>
 
+      @if(Auth::user()->id_role == "admin")
       <li class="nav-item">
         <a class="nav-link" href="{{route('user.index')}}">
           <i class="fa fa-users"></i>
           <span>User</span></a>
       </li>
+      @endif
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -94,11 +96,13 @@
         </div>
     </li>
 
+    @if (Auth::user()->id_role == "admin")
     <li class="nav-item">
       <a class="nav-link" href="{{route('konfigurasi.index')}}">
           <i class="fa fa-wrench"></i>
           <span>Konfigurasi</span></a>
-  </li>
+    </li>
+    @endif
 
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -142,7 +146,7 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-            <a class="nav-link" href="{{route('profile.edit', Auth::user()->id)}}">
+            <a class="nav-link" href="{{route('profile.show', Auth::user()->id)}}">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
             </a>
             </li>

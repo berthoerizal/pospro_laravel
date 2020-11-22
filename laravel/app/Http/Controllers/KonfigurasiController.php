@@ -20,13 +20,17 @@ class KonfigurasiController extends Controller
      */
     public function index()
     {
-        $konfig = DB::table('konfigurasis')->first();
-        $title = "Konfigurasi";
+        if (Auth::user()->id_role == "admin") {
+            $konfig = DB::table('konfigurasis')->first();
+            $title = "Konfigurasi";
 
-        return view('konfigurasi.index', [
-            'title' => $title,
-            'konfig' => $konfig
-        ]);
+            return view('konfigurasi.index', [
+                'title' => $title,
+                'konfig' => $konfig
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     /**

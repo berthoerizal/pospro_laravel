@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -20,13 +21,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $title = "Users";
-        $user = User::all();
+        if (Auth::user()->id_role == "admin") {
+            $title = "Users";
+            $user = User::all();
 
-        return view('user.index', [
-            'user' => $user,
-            'title' => $title,
-        ]);
+            return view('user.index', [
+                'user' => $user,
+                'title' => $title,
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -157,24 +162,6 @@ class UserController extends Controller
         } else {
             session()->flash('success', 'Data berhasil dihapus');
             return redirect(route('user.index'));
-        }
-    }
-
-    public function update_password(Request $request, $id)
-    {
-        if ($request->password == $request->confirm_password) {
-            $request->validate([
-                'password' => 'required|min:8'
-            ]);
-            $user = User::find($id);
-            $user->update([
-                'password' => Hash::make($request->password)
-            ]);
-            session()->flash('success', 'Password Berhasil diperbarui');
-            return redirect(route('profile.edit', $id));
-        } else {
-            session()->flash('error', 'Konfirmasi Password tidak valid');
-            return redirect(route('profile.edit', $id));
         }
     }
 
