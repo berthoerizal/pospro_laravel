@@ -53,7 +53,10 @@
                                     </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Simpan</button>
+                                <span class="float-right">
+                                    <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
+                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Simpan</button>
+                                </span>
                             </div>
                             </form>
                     </div>
