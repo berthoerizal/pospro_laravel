@@ -75,5 +75,7 @@
         </div>
       </div>
     </div>
+
+    <script src="{{asset('assets/login/app.js')}}"></script>
   </body>
 </html>
