@@ -1,108 +1,81 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Bertho Erizal">
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{{asset('assets/login/style.css')}}" />
     <title>Register</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="{{asset('assets/admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{asset('assets/admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
-
-</head>
-
-<body class="bg-gradient-primary">
-
+  </head>
+  <body>
     <div class="container">
-
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-
-            <div class="col-lg-6">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">{{$konfigurasi->nama_web}}</h1>
-                                    </div>
-
-                                                                        
-                                    <form method="POST" action="{{ route('register') }}">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="name">Nama Lengkap</label>
-                                            <input  id="name" type="text" name="name" value="{{ old('name') }}" required autocomplete="name" class="form-control @error('name') is-invalid @enderror" autofocus>
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="confirm_password">Konfirmasi Password</label>
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                        </div>
-                                        <hr>
-                                        <a href="{{ route('login') }}">Sudah punya akun? Login aja..</a>
-                                        <br><br>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            {{ __('Register') }}
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form method="POST" class="sign-in-form" action="{{ route('register') }}">
+            @csrf
+            <h2 class="title">Register</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input  id="name" type="text" name="name" value="{{ old('name') }}" required class="@error('name') is-invalid @enderror" placeholder="Nama Lengkap" autofocus>
+              @error('name')
+              <br>
+                  <span class="invalid-feedback" role="alert">
+                      <strong style="color: red;">{{ $message }}</strong>
+                  </span>
+            <br>
+              @enderror
             </div>
-
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" required>
+              @error('email')
+              <br>
+                  <span class="invalid-feedback" role="alert">
+                    <strong style="color: red;">{{ $message }}</strong>
+                  </span>
+                  <br>
+              @enderror
+            </div>
+            <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" placeholder="Password" required>
+                @error('password')
+                <br>
+                    <span class="invalid-feedback" role="alert">
+                        <strong style="color: red;">{{ $message }}</strong>
+                    </span>
+                    <br>
+                @enderror
+            </div>
+            <div class="input-field">
+                <i class="fas fa-lock"></i>
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"  placeholder="Konfirmasi Password">
+            </div>
+            <button type="submit" class="btn solid">
+              {{ __('Register') }}
+            </button>
+          </form>
         </div>
+      </div>
 
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>Sudah punya akun ?</h3>
+            <p>
+              POSPRO LARAVEL adalah sistem yang menyediakan fungsi atau fitur yang biasanya dibutuhkan dalam pembuatan website dengan framework Laravel. 
+            </p>
+            <a href="{{route('login')}}"><button  class="btn btn-outline-primary" id="sign-up-btn">Login</button>
+            </a>
+          </div>
+          <img src="{{asset('assets/login/img/log.svg')}}" class="image" alt="" />
+        </div>
+      </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="http://localhost/pospro-ci/asset/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="http://localhost/pospro-ci/asset/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="http://localhost/pospro-ci/asset/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="http://localhost/pospro-ci/asset/admin/js/sb-admin-2.min.js"></script>
-
-</body>
-
-</html>s
+    <script src="{{asset('assets/login/app.js')}}"></script>
+  </body>
+</html>
