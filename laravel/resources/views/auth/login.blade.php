@@ -51,7 +51,7 @@
           <div class="content">
             <h3>Belum punya akun ?</h3>
             <p>
-              POSPRO LARAVEL adalah sistem yang menyediakan fungsi atau fitur yang biasanya dibutuhkan dalam pembuatan website dengan framework Laravel. 
+              <a href="{{url('/')}}" style="text-decoration:none; color: white;"><b>POSPRO LARAVEL</b></a> adalah sistem yang menyediakan fungsi atau fitur yang biasanya dibutuhkan dalam pembuatan website dengan framework Laravel. 
             </p>
             <a href="{{route('register')}}"><button  class="btn btn-outline-primary" id="sign-up-btn">Register</button>
             </a>
@@ -60,7 +60,5 @@
         </div>
       </div>
     </div>
-
-    <script src="{{asset('assets/login/app.js')}}"></script>
   </body>
 </html>
