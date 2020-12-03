@@ -26,8 +26,6 @@
   <link  href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="{{asset('assets/jqueryui/jquery-ui.min.css')}}">
-
-  <!-- Script -->
 </head>
 
 <body id="page-top">
@@ -39,7 +37,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard.index')}}">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
       </div>
@@ -91,6 +89,7 @@
                 <a class="collapse-item" href="{{route('video.index')}}">Video</a>
                 <a class="collapse-item" href="{{route('dataexcel.index')}}">Data Excel</a>
                 <a class="collapse-item" href="{{route('autofill.index')}}">Auto Fill</a>
+                <a class="collapse-item" href="{{route('sertifikat.index')}}">Sertifikat</a>
                 <a class="collapse-item" href="{{route('countdown.index')}}">Countdown</a>
             </div>
         </div>
