@@ -168,7 +168,7 @@ class SertifikatController extends Controller
         $sertifikat = Sertifikat::find($id);
         // return view('sertifikat.show')
         //     ->with('sertifikat', $sertifikat);
-        $pdf = PDF::loadView('sertifikat.show', ['sertifikat' =>  $sertifikat])->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('sertifikat.pdf_sertifikat', ['sertifikat' =>  $sertifikat])->setPaper('a4', 'landscape');
         return $pdf->download('sertifikat.pdf');
     }
 }

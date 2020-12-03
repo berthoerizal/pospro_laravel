@@ -37,7 +37,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="float-left">
-                <a href="{{route('pdf_sertifikat',[$sertifikat->id])}}" class="btn btn-danger btn-sm"><i class="fa fa-file-pdf"></i> Download <b>PDF</b></a>
+                <a href="{{route('pdf_sertifikat',[$sertifikat->id])}}" class="btn btn-google btn-sm"><i class="fa fa-file-pdf"></i> Download <b>PDF</b></a>
             </div>
         </div>
         <div class="card-body">

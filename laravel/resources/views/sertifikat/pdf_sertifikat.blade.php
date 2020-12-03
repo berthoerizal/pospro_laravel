@@ -54,9 +54,9 @@ height: 100%;">
                     <td colspan="3"><p><?php echo html_entity_decode($sertifikat->keterangan); ?></p></td>
                 </tr>
                 <tr>
-                    <td style="padding-top: 120px;"><b>{{$sertifikat->panitia1}}</b><br>{{$sertifikat->jabatan1}}</td>
+                    <td style="padding-top: 130px;"><b>{{$sertifikat->panitia1}}</b><br>{{$sertifikat->jabatan1}}</td>
                     <td  style="padding-top: 10px;">{{$sertifikat->tempat}}, {{date("d F Y", strtotime($sertifikat->tanggal))}}</td>
-                    <td style="padding-top: 120px;"><b>{{$sertifikat->panitia2}}</b><br>{{$sertifikat->jabatan2}}</td>
+                    <td style="padding-top: 130px;"><b>{{$sertifikat->panitia2}}</b><br>{{$sertifikat->jabatan2}}</td>
                 </tr>
         </table>
     </div>
