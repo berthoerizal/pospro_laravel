@@ -25,13 +25,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="tanggal">Waktu Selesai</label>
+                                    <label for="tanggal">Tanggal</label>
                                     <input type="date" class="form-control form-control-sm" name="tanggal" id="tanggal" value="{{$countdown->tanggal}}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="waktu">Waktu Selesai</label>
+                                    <label for="waktu">Waktu</label>
                                     <input type="time" class="form-control form-control-sm" name="waktu" id="waktu" value="{{$countdown->waktu}}" required>
                                 </div>
                             </div>
