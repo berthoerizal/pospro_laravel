@@ -28,6 +28,7 @@ route::resource('dataexcel', 'DataexcelController');
 route::resource('autofill', 'AutofillController');
 route::resource('konfigurasi', 'KonfigurasiController');
 route::resource('sertifikat', 'SertifikatController');
+route::resource('kamus', 'KamusController');
 Route::put('/update_password/{id}', ['as' => 'update_password', 'uses' => 'ProfileController@update_password']);
 Route::get('/reset_password/{id}', ['as' => 'reset_password', 'uses' => 'UserController@reset_password']);
 Route::get('/download_dokumen/{id}', ['as' => 'download_dokumen', 'uses' => 'DokumenController@download_dokumen']);

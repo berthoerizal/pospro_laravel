@@ -77,6 +77,11 @@
       @endif
 
       <li class="nav-item">
+        <a class="nav-link" href="{{route('kamus.index')}}">
+          <i class="fa fa-book"></i>
+          <span>Kamus</span></a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fa fa-folder"></i>
             <span>Components</span>
