@@ -88,7 +88,7 @@ class UserController extends Controller
             }
         } else {
             session()->flash('error', 'Konfirmasi Password tidak valid');
-            return redirect(route('user'));
+            return redirect(route('user.index'));
         }
     }
 

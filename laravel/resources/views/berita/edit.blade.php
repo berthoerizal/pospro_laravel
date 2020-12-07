@@ -49,7 +49,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="judul">Judul</label>
-                                <input type="text" class="form-control form-control-sm" name="judul" id="judul" placeholder="Judul" value="{{$berita->judul}}" required>
+                                <input type="text" class="form-control" name="judul" id="judul" placeholder="Judul" value="{{$berita->judul}}" required>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -59,15 +59,25 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="gambar">Gambar</label>
-                                <input type="file" class="form-control form-control-sm" name="gambar" id="gambar">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="gambar">Gambar</label>
+                                </div>
+                                <div class="col-sm-2">
+                                <img src="{{ asset('assets/images/'.$berita->gambar) }}" alt="" class="img-thumbnail img-preview">
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="gambar" name="gambar" onchange="previewImg()">
+                                        <label class="custom-file-label" for="gambar">Pilih Gambar</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <select class="form-control form-control-sm" id="status" name="status">
+                                <select class="form-control" id="status" name="status">
                                     <option value="publish"
                                         @if($berita->status=="publish")
                                         selected
@@ -92,4 +102,20 @@
     <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
+<script>
+    function previewImg() {
+        const gambar = document.querySelector('#gambar');
+        const gambarLabel = document.querySelector('.custom-file-label');
+        const imgPreview = document.querySelector('.img-preview');
+
+        gambarLabel.textContent = gambar.files[0].name;
+
+        const fileGambar = new FileReader();
+        fileGambar.readAsDataURL(gambar.files[0]);
+
+        fileGambar.onload = function(e) {
+            imgPreview.src = e.target.result;
+        }
+    }
+</script>
 @endsection

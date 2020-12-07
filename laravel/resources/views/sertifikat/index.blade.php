@@ -115,22 +115,32 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="tempat">Tempat</label>
                                             <input type="text" class="form-control form-control-sm" name="tempat" id="tempat" placeholder="Tempat" value="{{$sertifikat->tempat}}" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="tanggal">Tanggal</label>
                                             <input type="date" class="form-control form-control-sm" name="tanggal" id="tanggal" value="{{$sertifikat->tanggal}}" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="gambar">Background</label>
-                                            <input type="file" name="gambar" id="gambar">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="gambar">Background</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="gambar" name="gambar" onchange="previewImg()">
+                                                    <label class="custom-file-label" for="gambar">Pilih Gambar</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <img src="{{ asset('assets/images/'.$sertifikat->gambar) }}" alt="" class="img-thumbnail img-preview">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -149,4 +159,20 @@
     <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
+<script>
+    function previewImg() {
+        const gambar = document.querySelector('#gambar');
+        const gambarLabel = document.querySelector('.custom-file-label');
+        const imgPreview = document.querySelector('.img-preview');
+
+        gambarLabel.textContent = gambar.files[0].name;
+
+        const fileGambar = new FileReader();
+        fileGambar.readAsDataURL(gambar.files[0]);
+
+        fileGambar.onload = function(e) {
+            imgPreview.src = e.target.result;
+        }
+    }
+</script>
 @endsection

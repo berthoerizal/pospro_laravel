@@ -29,9 +29,10 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $x=1; ?>
                 @foreach($kamus as $kamus)
                     <tr>
-                        <td><?php echo $x=1; $x++; ?></td>
+                        <td><?php echo $x; ?></td>
                         <td><b>{{$kamus->kata}}</b></td>
                         <td><i>{{$kamus->arti}}</i></td>
                         <td>{{$kamus->contoh}}</td>
@@ -40,6 +41,7 @@
                             @include('kamus.delete')
                         </td>
                     </tr>
+                    <?php $x++; ?>
                 @endforeach
             </tbody>
             </table>

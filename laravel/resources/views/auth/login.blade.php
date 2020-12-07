@@ -17,27 +17,20 @@
           <form method="POST" class="sign-in-form" action="{{ route('login') }}">
             @csrf
             <h2 class="title">Login</h2>
+            @error('email')
+            <br>
+            <span class="invalid-feedback" role="alert">
+                <strong style="color: red;">{{ $message }}</strong>
+            </span>
+            <br>
+            @enderror
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input id="exampleInputEmail" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="Email" autofocus>
-              @error('email')
-                <br>
-                <span class="invalid-feedback" role="alert">
-                    <strong style="color: red;">{{ $message }}</strong>
-                </span>
-                <br>
-              @enderror
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
               <input id="exampleInputPassword" type="password" class="@error('password') is-invalid @enderror" name="password" required placeholder="Password">
-              @error('password')
-                <br>
-                <span class="invalid-feedback" role="alert">
-                    <strong style="color: red;">{{ $message }}</strong>
-                </span>
-                <br>
-              @enderror
             </div>
             <button type="submit" class="btn solid">
               {{ __('Login') }}

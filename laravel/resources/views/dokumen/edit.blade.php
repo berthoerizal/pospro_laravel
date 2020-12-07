@@ -31,13 +31,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="gambar">File:</label>
-                                <input type="file" class="" name="gambar" id="gambar" multiple required>
+                                <input type="file" class="" name="gambar" id="gambar">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
-                                <input type="text" class="form-control form-control-sm" name="keterangan" id="keterangan" placeholder="Keterangan" value="{{$dokumen->slug_dokumen}}" disabled>
+                                <input type="text" class="form-control form-control-sm" name="keterangan" id="keterangan" placeholder="Keterangan" value="{{$dokumen->gambar}}" disabled>
                             </div>
                         </div>
                     </div>

@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <label for="contoh">Contoh</label>
-                    <textarea name="contoh" id="contoh" class="form-control form-control-sm" cols="30" rows="10" required>{{$kamus->contoh}}</textarea>
+                    <textarea name="contoh" id="contoh" class="form-control form-control-sm" cols="30" rows="5" required>{{$kamus->contoh}}</textarea>
                 </div>
             </div>
             <div class="modal-footer">

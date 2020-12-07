@@ -63,7 +63,7 @@
       </div>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{route('profile.show', Auth::user()->id)}}">
+        <a class="nav-link" href="{{route('profile.show', Crypt::encrypt(Auth::user()->id))}}">
           <i class="fa fa-user"></i>
           <span>Profile</span></a>
       </li>
@@ -150,7 +150,7 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-            <a class="nav-link" href="{{route('profile.show', Auth::user()->id)}}">
+            <a class="nav-link" href="{{route('profile.show',Crypt::encrypt(Auth::user()->id))}}">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
             </a>
             </li>

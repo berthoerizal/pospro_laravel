@@ -93,6 +93,7 @@ class SertifikatController extends Controller
             'jabatan1' => 'required',
             'panitia2' => 'required',
             'jabatan2' => 'required',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($request->hasFile('gambar')) {

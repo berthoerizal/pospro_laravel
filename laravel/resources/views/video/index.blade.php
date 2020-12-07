@@ -32,8 +32,8 @@
                         <td style="width: 60%;"><b>{{$video->nama_video}}</b><br><span class="badge badge-light">Tanggal Upload: {{date("d M Y", strtotime($video->created_at))}}</span></td>
                         <td>{{$video->name}}</td>
                         <td>
-                            <a class="btn btn-info btn-sm" href="{{route('video.show', $video->id)}}"><i class="fa fa-file-alt"></i> Detail</a>
-                            <a class="btn btn-success btn-sm" href="{{route('video.edit', $video->id)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
+                            <a class="btn btn-info btn-sm" href="{{route('video.show', $video->slug_video)}}"><i class="fa fa-file-alt"></i> Detail</a>
+                            <a class="btn btn-success btn-sm" href="{{route('video.edit', $video->slug_video)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
                             @include('video.delete')
                         </td>
                     </tr>

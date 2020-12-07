@@ -54,27 +54,47 @@ class BeritaController extends Controller
         $request->validate([
             'judul' => 'required',
             'isi' => 'required',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $resorce  = $request->file('gambar');
-        $gambar   = $resorce->getClientOriginalName();
-        $resorce->move(\base_path() . "/../assets/images", $gambar);
+        if ($request->hasFile('gambar')) {
+            $resorce  = $request->file('gambar');
+            $gambar   = $resorce->getClientOriginalName();
+            $resorce->move(\base_path() . "/../assets/images", $gambar);
 
-        $berita = Berita::create([
-            'judul' => $request->judul,
-            'slug_judul' => Str::slug($request->judul),
-            'isi' => $request->isi,
-            'gambar' => $gambar,
-            'id_user' => Auth::user()->id,
-            'status' => $request->status
-        ]);
+            $berita = Berita::create([
+                'judul' => $request->judul,
+                'slug_judul' => Str::slug($request->judul),
+                'isi' => $request->isi,
+                'gambar' => $gambar,
+                'id_user' => Auth::user()->id,
+                'status' => $request->status
+            ]);
 
-        if (!$berita) {
-            session()->flash('error', 'Data gagal ditambah');
-            return redirect(route('berita.index'));
+            if (!$berita) {
+                session()->flash('error', 'Data gagal ditambah');
+                return redirect(route('berita.index'));
+            } else {
+                session()->flash('success', 'Data berhasil ditambah');
+                return redirect(route('berita.index'));
+            }
         } else {
-            session()->flash('success', 'Data berhasil ditambah');
-            return redirect(route('berita.index'));
+            $berita = Berita::create([
+                'judul' => $request->judul,
+                'slug_judul' => Str::slug($request->judul),
+                'isi' => $request->isi,
+                'gambar' => 'default-image.jpg',
+                'id_user' => Auth::user()->id,
+                'status' => $request->status
+            ]);
+
+            if (!$berita) {
+                session()->flash('error', 'Data gagal ditambah');
+                return redirect(route('berita.index'));
+            } else {
+                session()->flash('success', 'Data berhasil ditambah');
+                return redirect(route('berita.index'));
+            }
         }
     }
 
@@ -84,10 +104,10 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug_judul)
     {
         $title = "Detail Berita";
-        $berita = DB::table('beritas')->join('users', 'beritas.id_user', '=', 'users.id')->select('beritas.*', 'users.name')->where('beritas.id', $id)->first();
+        $berita = DB::table('beritas')->join('users', 'beritas.id_user', '=', 'users.id')->select('beritas.*', 'users.name')->where('beritas.slug_judul', $slug_judul)->first();
 
         return view('berita.show', [
             'title' => $title,
@@ -101,10 +121,10 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug_judul)
     {
         $title = "Edit Berita";
-        $berita = Berita::find($id);
+        $berita = Berita::where('slug_judul', $slug_judul)->first();
         return view('berita.edit', [
             'title' => $title,
             'berita' => $berita
@@ -120,14 +140,22 @@ class BeritaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'judul' => 'required',
+            'isi' => 'required',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         if ($request->hasFile('gambar')) {
             $resorce  = $request->file('gambar');
             $gambar   = $resorce->getClientOriginalName();
             $resorce->move(\base_path() . "/../assets/images", $gambar);
 
             $berita = Berita::find($id);
-            $old_image = \base_path() . "/../assets/images/" . $berita->gambar;
-            @unlink($old_image);
+            if ($berita->gambar != 'default-image.jpg') {
+                $old_image = \base_path() . "/../assets/images/" . $berita->gambar;
+                @unlink($old_image);
+            }
 
             $berita->update([
                 'judul' => $request->judul,
@@ -174,8 +202,11 @@ class BeritaController extends Controller
     public function destroy($id)
     {
         $berita = Berita::find($id);
-        $old_image = \base_path() . "/../assets/images/" . $berita->gambar;
-        @unlink($old_image);
+        if ($berita->gambar != 'default-image.jpg') {
+            $old_image = \base_path() . "/../assets/images/" . $berita->gambar;
+            @unlink($old_image);
+        }
+
         $berita->delete();
         if (!$berita) {
             session()->flash('error', 'Data gagal dihapus');

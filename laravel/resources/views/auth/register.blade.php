@@ -20,36 +20,36 @@
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input  id="name" type="text" name="name" value="{{ old('name') }}" required class="@error('name') is-invalid @enderror" placeholder="Nama Lengkap" autofocus>
-              @error('name')
-              <br>
-                  <span class="invalid-feedback" role="alert">
-                      <strong style="color: red;">{{ $message }}</strong>
-                  </span>
-            <br>
-              @enderror
             </div>
+            @error('name')
+            <br>
+                <span class="invalid-feedback" role="alert">
+                    <strong style="color: red;">{{ $message }}</strong>
+                </span>
+            <br>
+            @enderror
             <div class="input-field">
               <i class="fas fa-envelope"></i>
               <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" required>
-              @error('email')
-              <br>
-                  <span class="invalid-feedback" role="alert">
-                    <strong style="color: red;">{{ $message }}</strong>
-                  </span>
-                  <br>
-              @enderror
             </div>
+            @error('email')
+            <br>
+                <span class="invalid-feedback" role="alert">
+                  <strong style="color: red;">{{ $message }}</strong>
+                </span>
+                <br>
+            @enderror
             <div class="input-field">
                 <i class="fas fa-lock"></i>
                 <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" placeholder="Password" required>
-                @error('password')
-                <br>
-                    <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
-                    </span>
-                    <br>
-                @enderror
             </div>
+            @error('password')
+            <br>
+                <span class="invalid-feedback" role="alert">
+                    <strong style="color: red;">{{ $message }}</strong>
+                </span>
+                <br>
+            @enderror
             <div class="input-field">
                 <i class="fas fa-lock"></i>
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"  placeholder="Konfirmasi Password">

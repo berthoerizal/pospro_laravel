@@ -40,8 +40,8 @@
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-info btn-sm" href="{{route('berita.show', $berita->id)}}"><i class="fa fa-file-alt"></i> Detail</a>
-                            <a class="btn btn-success btn-sm" href="{{route('berita.edit', $berita->id)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
+                            <a class="btn btn-info btn-sm" href="{{route('berita.show', $berita->slug_judul)}}"><i class="fa fa-file-alt"></i> Detail</a>
+                            <a class="btn btn-success btn-sm" href="{{route('berita.edit', $berita->slug_judul)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
                             @include('berita.delete')
                         </td>
                     </tr>

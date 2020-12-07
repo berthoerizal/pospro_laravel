@@ -73,10 +73,10 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug_video)
     {
         $title = "Detail Video";
-        $video = DB::table('videos')->join('users', 'videos.id_user', '=', 'users.id')->select('videos.*', 'users.name')->where('videos.id', $id)->first();
+        $video = DB::table('videos')->join('users', 'videos.id_user', '=', 'users.id')->select('videos.*', 'users.name')->where('videos.slug_video', $slug_video)->first();
         return view('video.show', [
             'title' => $title,
             'video' => $video
@@ -89,10 +89,10 @@ class VideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug_video)
     {
         $title = "Edit Video";
-        $video = Video::find($id);
+        $video = Video::where('slug_video', $slug_video)->first();
         return view('video.edit', [
             'title' => $title,
             'video' => $video

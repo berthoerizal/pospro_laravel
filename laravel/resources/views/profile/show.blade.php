@@ -37,7 +37,7 @@
                                                 <tr>
                                                     <td>Upload Gambar</td>
                                                     <td>
-                                                        <input type="file" name="gambar" id="gambar">
+                                                        <input type="file" name="gambar" id="gambar" onchange="previewImg()">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -66,9 +66,9 @@
                         <div class="card-body">
                             <div style="text-align: center;">
                                 @if ($user->gambar!=NULL)
-                                <img src="{{ asset('assets/images/'.$user->gambar) }}" class="img img-responsive" width="200px">
+                                <img src="{{ asset('assets/images/'.$user->gambar) }}" class="img img-responsive img-preview" width="200px">
                                 @else
-                                <img src="{{ asset('assets/images/profiledefault.PNG') }}" class="img img-responsive" width="200px">
+                                <img src="{{ asset('assets/images/profiledefault.PNG') }}" class="img img-responsive img-preview" width="200px">
                                 @endif
                             </div>
                         </div>
@@ -82,4 +82,16 @@
             <!-- /.container-fluid -->
         </div>
         <!-- End of Main Content -->
+        <script>
+            function previewImg() {
+                const gambar = document.querySelector('#gambar');
+                const imgPreview = document.querySelector('.img-preview');
+                const fileGambar = new FileReader();
+                fileGambar.readAsDataURL(gambar.files[0]);
+        
+                fileGambar.onload = function(e) {
+                    imgPreview.src = e.target.result;
+                }
+            }
+        </script>
 @endsection

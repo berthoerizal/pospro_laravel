@@ -54,17 +54,18 @@ class DokumenController extends Controller
         if ($request->hasFile('gambar')) {
             $files = $request->file('gambar');
             foreach ($files as $file) {
-                $filename = $file->getClientOriginalName();
+                $x = 1;
+                $filename = time() . '-' . $file->getClientOriginalName();
                 $file->move(\base_path() . "/../assets/images", $filename);
 
-                $slug_filename = Str::slug($filename);
-                $slug_dokumen = Str::slug($request->nama_dokumen) . "-" . $slug_filename;
+                $slug_dokumen = Str::slug($request->nama_dokumen);
                 Dokumen::create([
                     'id_user' => Auth::user()->id,
                     'nama_dokumen' => $request->nama_dokumen,
                     'slug_dokumen' => $slug_dokumen,
                     'gambar' => $filename
                 ]);
+                $x++;
             }
 
             session()->flash('success', 'Data berhasil ditambah');
@@ -89,10 +90,10 @@ class DokumenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug_dokumen)
     {
         $title = "Edit Dokumen";
-        $dokumen = Dokumen::find($id);
+        $dokumen = Dokumen::where('slug_dokumen', $slug_dokumen)->first();
         return view('dokumen.edit', [
             'title' => $title,
             'dokumen' => $dokumen
@@ -110,15 +111,14 @@ class DokumenController extends Controller
     {
         if ($request->hasFile('gambar')) {
             $resorce  = $request->file('gambar');
-            $gambar   = $resorce->getClientOriginalName();
+            $gambar   = $resorce->getClientOriginalName() . '-' . time();
             $resorce->move(\base_path() . "/../assets/images", $gambar);
 
             $dokumen = Dokumen::find($id);
             $old_image = \base_path() . "/../assets/images/" . $dokumen->gambar;
             @unlink($old_image);
 
-            $slug_gambar = Str::slug($gambar);
-            $slug_dokumen = Str::slug($request->nama_dokumen) . "-" . $slug_gambar;
+            $slug_dokumen = Str::slug($request->nama_dokumen);
             $dokumen->update([
                 'nama_dokumen' => $request->nama_dokumen,
                 'slug_dokumen' => $slug_dokumen,
@@ -128,7 +128,23 @@ class DokumenController extends Controller
 
             if (!$dokumen) {
                 session()->flash('error', 'Data gagal diubah');
-                return redirect(route('dokumen.edit', $id));
+                return redirect(route('dokumen.index'));
+            } else {
+                session()->flash('success', 'Data berhasil diubah');
+                return redirect(route('dokumen.index'));
+            }
+        } else {
+            $dokumen = Dokumen::find($id);
+            $slug_dokumen = Str::slug($request->nama_dokumen);
+            $dokumen->update([
+                'nama_dokumen' => $request->nama_dokumen,
+                'slug_dokumen' => $slug_dokumen,
+                'id_user' => Auth::user()->id,
+            ]);
+
+            if (!$dokumen) {
+                session()->flash('error', 'Data gagal diubah');
+                return redirect(route('dokumen.index'));
             } else {
                 session()->flash('success', 'Data berhasil diubah');
                 return redirect(route('dokumen.index'));
