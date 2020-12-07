@@ -36,5 +36,6 @@ Route::get('/export', ['as' => 'export', 'uses' => 'DataexcelController@export']
 Route::post('/import', ['as' => 'import', 'uses' => 'DataexcelController@import']);
 Route::get('/delete_all', ['as' => 'delete_all', 'uses' => 'DataexcelController@delete_all']);
 Route::post('/getdata', ['as' => 'getdata', 'uses' => 'AutofillController@getdata']);
+Route::get('/cari', ['as' => 'cari', 'uses' => 'BeritaController@cari']);
 Route::get('/pdf_sertifikat/{id}', ['as' => 'pdf_sertifikat', 'uses' => 'SertifikatController@pdf_sertifikat']);
 Auth::routes();

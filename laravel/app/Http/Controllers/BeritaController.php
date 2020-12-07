@@ -26,6 +26,24 @@ class BeritaController extends Controller
         return view('berita.index', compact('berita'));
     }
 
+    public function cari(Request $request)
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
+
+        // mengambil data dari table pegawai sesuai pencarian data
+        if ($cari == "") {
+            $berita = Berita::paginate(3);
+        } else {
+            $berita = DB::table('beritas')
+                ->where('judul', $cari)
+                ->paginate(3);
+        }
+
+        // mengirim data pegawai ke view index
+        return view('berita.index', compact('berita'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

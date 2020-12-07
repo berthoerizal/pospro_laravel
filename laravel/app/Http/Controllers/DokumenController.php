@@ -111,7 +111,7 @@ class DokumenController extends Controller
     {
         if ($request->hasFile('gambar')) {
             $resorce  = $request->file('gambar');
-            $gambar   = $resorce->getClientOriginalName() . '-' . time();
+            $gambar   = time() . '-' . $resorce->getClientOriginalName();
             $resorce->move(\base_path() . "/../assets/images", $gambar);
 
             $dokumen = Dokumen::find($id);

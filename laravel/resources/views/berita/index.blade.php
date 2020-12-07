@@ -11,11 +11,20 @@
 
        <!-- DataTales Example -->
     <div class="row">
-        <div class="col">
+        <div class="col-md-2">
             <a href="{{route('berita.create')}}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Berita</a>
         </div>
+        <div class="col-md-10">
+        <form action="{{route('cari')}}" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Masukkan keyword pencarian" name="cari" value="{{old('cari')}}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit" name="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+        </div>
     </div>
-    <br>
     <div class="row">
         @foreach($berita as $data)
         <div class="col-md-4">
