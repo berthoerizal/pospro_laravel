@@ -7,48 +7,41 @@
         @include('partial.message')
 
        <!-- Page Heading -->
-       <h1 class="h3 mb-2 text-gray-800">{{$title}}</h1><hr>
+       <h1 class="h3 mb-2 text-gray-800">Berita</h1><hr>
 
        <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <div class="float-right">
-                <a href="{{route('berita.create')}}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah</a>
+    <div class="row">
+        <div class="col">
+            <a href="{{route('berita.create')}}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah Berita</a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        @foreach($berita as $data)
+        <div class="col-md-4">
+            <div class="card shadow mb-4" >
+                <div class="card-header" style="height: 200px;">
+                    <img class="card-img-top" src="{{asset('assets/images/'.$data->gambar)}}" width="100%" height="100%">
+                  </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{$data->judul}}</h5>
+                    <a class="btn btn-info btn-sm" href="{{route('berita.show', $data->slug_judul)}}"><i class="fa fa-file-alt"></i> Detail</a>
+                    <a class="btn btn-success btn-sm" href="{{route('berita.edit', $data->slug_judul)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
+                    @include('berita.delete')
+                </div>
+                <div class="card-footer text-muted">
+                   {{date('d F Y', strtotime($data->created_at))}}
+                  </div>
+              </div>
+        </div>
+        @endforeach
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                {!! $berita->links() !!}
             </div>
-        </div>
-        <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                <th>Judul</th>
-                <th>Uploader</th>
-                <th>Status</th>
-                <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($berita as $berita)
-                    <tr>
-                        <td><b>{{$berita->judul}}</b><br><span class="badge badge-light">Tanggal Upload: {{date("d M Y", strtotime($berita->created_at))}}</span></td>
-                        <td>{{$berita->name}}</td>
-                        <td>
-                            @if($berita->status=="publish")
-                            Publish
-                            @else
-                            Draft
-                            @endif
-                        </td>
-                        <td>
-                            <a class="btn btn-info btn-sm" href="{{route('berita.show', $berita->slug_judul)}}"><i class="fa fa-file-alt"></i> Detail</a>
-                            <a class="btn btn-success btn-sm" href="{{route('berita.edit', $berita->slug_judul)}}"><i class="fa fa-pencil-alt"></i> Edit</a>
-                            @include('berita.delete')
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-            </table>
-        </div>
         </div>
     </div>
     </div>

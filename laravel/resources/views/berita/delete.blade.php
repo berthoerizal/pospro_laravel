@@ -1,9 +1,9 @@
-<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#deleteModal{{$berita->id}}">
+<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#deleteModal{{$data->id}}">
     <i class="fa fa-trash-alt"></i>
     Hapus
 </a>
 <!-- Tambah Modal-->
-<div class="modal fade" id="deleteModal{{$berita->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -13,11 +13,11 @@
         </button>
         </div>
         <div class="modal-body">
-            <p>Yakin ingin menghapus <b>{{$berita->judul}}</b> ?</p>
+            <p>Yakin ingin menghapus <b>{{$data->judul}}</b> ?</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-            <form action="{{ route('berita.destroy', $berita->id) }}" method="POST">
+            <form action="{{ route('berita.destroy', $data->id) }}" method="POST">
                 @method('DELETE')
                 @csrf
                 <input class="btn btn-danger btn-sm" type="submit" value="Hapus" />

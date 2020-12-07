@@ -21,13 +21,9 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        $berita = DB::table('beritas')->join('users', 'beritas.id_user', '=', 'users.id')->select('beritas.*', 'users.name')->get();
-
+        $berita = Berita::paginate(3);
         $title = "Berita";
-        return view('berita.index', [
-            'berita' => $berita,
-            'title' => $title,
-        ]);
+        return view('berita.index', compact('berita'));
     }
 
     /**
