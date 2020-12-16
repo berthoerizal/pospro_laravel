@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('kamus', 'ApiKamusController@index');
+Route::get('kamus/{id}', 'ApiKamusController@show');
+Route::post('kamus', 'ApiKamusController@store');
+Route::put('kamus/{id}', 'ApiKamusController@update');
+Route::delete('kamus/{id}', 'ApiKamusController@destroy');
