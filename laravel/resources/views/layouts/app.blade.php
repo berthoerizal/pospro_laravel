@@ -96,6 +96,7 @@
                 <a class="collapse-item" href="{{route('autofill.index')}}">Auto Fill</a>
                 <a class="collapse-item" href="{{route('sertifikat.index')}}">Sertifikat</a>
                 <a class="collapse-item" href="{{route('countdown.index')}}">Countdown</a>
+                <a class="collapse-item" href="{{route('cekktp.index')}}">Cek KTP</a>
             </div>
         </div>
     </li>

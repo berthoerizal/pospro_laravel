@@ -92,6 +92,9 @@
               </div>
     
               <!-- Content Row -->
+              <div class="col-md-12">
+                {{$data['nik']}}
+              </div>
 
     <!-- /.container-fluid -->
 </div>
