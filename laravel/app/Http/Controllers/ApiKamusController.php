@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kamus;
 use Validator;
+use Illuminate\Support\Facades\DB;
 
 class ApiKamusController extends Controller
 {
@@ -13,14 +14,25 @@ class ApiKamusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kamus = Kamus::all();
-        return response()->json([
-            'success' => true,
-            'message' => 'Get method success',
-            'data' => $kamus
-        ], 200);
+        $api_token = $request->input('api_token');
+        $check_token = DB::table('tokens')->where('api_token', $api_token)->first();
+
+        if (!$check_token) {
+            return response()->json([
+                'success' => false,
+                'message' => 'API Token is not found',
+                'data' => NULL
+            ], 404);
+        } else {
+            $kamus = Kamus::all();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get method success',
+                'data' => $kamus
+            ], 200);
+        }
     }
 
     /**
@@ -41,37 +53,48 @@ class ApiKamusController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = array(
-            'kata' => "required|unique:kamuses,kata",
-            'arti' => "required",
-            'contoh' => "required"
-        );
-        $valid = Validator::make($request->all(), $rules);
-        if ($valid->fails()) {
+        $api_token = $request->input('api_token');
+        $check_token = DB::table('tokens')->where('api_token', $api_token)->first();
+
+        if (!$check_token) {
             return response()->json([
                 'success' => false,
-                'message' => $valid->errors(),
-                'data' => null
-            ], 400);
+                'message' => 'API Token is not found',
+                'data' => NULL
+            ], 404);
         } else {
-            $kamus = Kamus::create([
-                'kata' => $request->json()->get('kata'),
-                'arti' => $request->json()->get('arti'),
-                'contoh' => $request->json()->get('contoh')
-            ]);
-
-            if (!$kamus) {
+            $rules = array(
+                'kata' => "required|unique:kamuses,kata",
+                'arti' => "required",
+                'contoh' => "required"
+            );
+            $valid = Validator::make($request->all(), $rules);
+            if ($valid->fails()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'POST method fail',
-                    'data' => NULL
+                    'message' => $valid->errors(),
+                    'data' => null
                 ], 400);
             } else {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'POST method success',
-                    'data' => $kamus
-                ], 200);
+                $kamus = Kamus::create([
+                    'kata' => $request->json()->get('kata'),
+                    'arti' => $request->json()->get('arti'),
+                    'contoh' => $request->json()->get('contoh')
+                ]);
+
+                if (!$kamus) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'POST method fail',
+                        'data' => NULL
+                    ], 400);
+                } else {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'POST method success',
+                        'data' => $kamus
+                    ], 200);
+                }
             }
         }
     }
@@ -82,21 +105,32 @@ class ApiKamusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $kamus = Kamus::find($id);
-        if (!$kamus) {
+        $api_token = $request->input('api_token');
+        $check_token = DB::table('tokens')->where('api_token', $api_token)->first();
+
+        if (!$check_token) {
             return response()->json([
                 'success' => false,
-                'message' => 'GET method fail',
+                'message' => 'API Token is not found',
                 'data' => NULL
-            ], 400);
+            ], 404);
         } else {
-            return response()->json([
-                'success' => true,
-                'message' => 'GET method success',
-                'data' => $kamus
-            ], 200);
+            $kamus = Kamus::find($id);
+            if (!$kamus) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'GET method fail',
+                    'data' => NULL
+                ], 400);
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'GET method success',
+                    'data' => $kamus
+                ], 200);
+            }
         }
     }
 
@@ -120,38 +154,49 @@ class ApiKamusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = array(
-            'kata' => 'required',
-            'arti' => 'required',
-            'contoh' => 'required'
-        );
-        $valid = Validator::make($request->all(), $rules);
-        if ($valid->fails()) {
+        $api_token = $request->input('api_token');
+        $check_token = DB::table('tokens')->where('api_token', $api_token)->first();
+
+        if (!$check_token) {
             return response()->json([
                 'success' => false,
-                'message' => $valid->errors(),
-                'data' => null
-            ]);
+                'message' => 'API Token is not found',
+                'data' => NULL
+            ], 404);
         } else {
-            $kamus = Kamus::find($id);
-            $kamus->update([
-                'kata' => $request->json()->get('kata'),
-                'arti' => $request->json()->get('arti'),
-                'contoh' => $request->json()->get('contoh')
-            ]);
-
-            if (!$kamus) {
+            $rules = array(
+                'kata' => 'required',
+                'arti' => 'required',
+                'contoh' => 'required'
+            );
+            $valid = Validator::make($request->all(), $rules);
+            if ($valid->fails()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'PUT method fail',
-                    'data' => NULL
-                ], 400);
+                    'message' => $valid->errors(),
+                    'data' => null
+                ]);
             } else {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'PUT method success',
-                    'data' => $kamus
-                ], 200);
+                $kamus = Kamus::find($id);
+                $kamus->update([
+                    'kata' => $request->json()->get('kata'),
+                    'arti' => $request->json()->get('arti'),
+                    'contoh' => $request->json()->get('contoh')
+                ]);
+
+                if (!$kamus) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'PUT method fail',
+                        'data' => NULL
+                    ], 400);
+                } else {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'PUT method success',
+                        'data' => $kamus
+                    ], 200);
+                }
             }
         }
     }
@@ -162,23 +207,34 @@ class ApiKamusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $kamus = Kamus::find($id);
-        $kamus->delete();
+        $api_token = $request->input('api_token');
+        $check_token = DB::table('tokens')->where('api_token', $api_token)->first();
 
-        if (!$kamus) {
+        if (!$check_token) {
             return response()->json([
                 'success' => false,
-                'message' => 'DELETE method fail',
+                'message' => 'API Token is not found',
                 'data' => NULL
-            ], 400);
+            ], 404);
         } else {
-            return response()->json([
-                'success' => true,
-                'message' => 'DELETE method success',
-                'data' => $kamus
-            ], 200);
+            $kamus = Kamus::find($id);
+            $kamus->delete();
+
+            if (!$kamus) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'DELETE method fail',
+                    'data' => NULL
+                ], 400);
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'DELETE method success',
+                    'data' => $kamus
+                ], 200);
+            }
         }
     }
 }
