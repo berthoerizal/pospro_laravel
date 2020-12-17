@@ -74,6 +74,11 @@
           <i class="fa fa-users"></i>
           <span>User</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('token.index')}}">
+          <i class="fa fa-key"></i>
+          <span>API Token</span></a>
+      </li>
       @endif
 
       <li class="nav-item">

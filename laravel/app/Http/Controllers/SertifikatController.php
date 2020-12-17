@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Sertifikat;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class SertifikatController extends Controller
