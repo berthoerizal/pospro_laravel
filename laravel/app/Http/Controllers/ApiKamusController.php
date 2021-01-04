@@ -16,23 +16,8 @@ class ApiKamusController extends Controller
      */
     public function index(Request $request)
     {
-        $api_token = $request->input('api_token');
-        $check_token = DB::table('tokens')->where('api_token', $api_token)->first();
-
-        if (!$check_token) {
-            return response()->json([
-                'success' => false,
-                'message' => 'API Token is not found',
-                'data' => NULL
-            ], 404);
-        } else {
-            $kamus = Kamus::all();
-            return response()->json([
-                'success' => true,
-                'message' => 'Get method success',
-                'data' => $kamus
-            ], 200);
-        }
+         $kamus = Kamus::all();
+         return response()->json($kamus);
     }
 
     /**
